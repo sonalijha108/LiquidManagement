@@ -4,5 +4,5 @@ import com.beans.User;
 
 public interface Service {
 	User loginUser(String user, String password);
-
+	boolean isUserAdded(User user);
 }
