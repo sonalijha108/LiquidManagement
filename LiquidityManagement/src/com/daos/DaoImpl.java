@@ -34,4 +34,30 @@ public class DaoImpl implements Dao{
 		return user;
 	}
 
+	@Override
+	public int addUser(User user) {
+		int rowsAdded=0;
+		System.out.println("here");
+		Connection conn=MyConnection.openConnection();
+		System.out.println("there");
+		String addUsers="insert into USERS values(?,?,?,?,?)";
+		try {
+			
+				PreparedStatement pstatement=conn.prepareStatement(addUsers);
+				pstatement.setString(1, user.getUsername());
+				pstatement.setString(2, user.getName());
+				pstatement.setString(3, user.getPassword());
+				pstatement.setString(4, user.getEmailID());
+				pstatement.setInt(5, user.getContactInfo());
+				rowsAdded=pstatement.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rowsAdded;
+	}
+
 }
