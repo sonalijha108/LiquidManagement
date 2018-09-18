@@ -10,8 +10,8 @@ public class CashFlow {
 	
 	public CashFlow() 
 	{
-		customerID = "ABC";
-		tradeID = "XYZ";
+		customerID = "pZQBdVefZJ";
+		tradeID = "33776";
 		currency = "USD";
 		amount = 500.00;
 		buysell = true;
