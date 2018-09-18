@@ -1,6 +1,8 @@
 package com.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,14 +34,27 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName=request.getParameter("user");
 		String pass=request.getParameter("password");
+		if(userName.isEmpty()||pass.isEmpty()) {
+			String message="Invalid input. Please try again.";
+			request.setAttribute("mymessage", message);
+			RequestDispatcher dispatcher=request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
 		User user=new User();
 		Service service=new ServiceImpl();
 		user=service.loginUser(userName, pass);
-		if(user==null )
-			response.getOutputStream().println("<h1>Hello " + "You are not a valid user, please sign in." + "!</h1>");
+		if(user==null ) {
+			String message="You are not a valid user. Please sign in.";
+			request.setAttribute("mymessage", message);
+			RequestDispatcher dispatcher=request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
+		}
 		else
 			response.getOutputStream().println("<h1>Hello "+ user.getName()+ "You are logged in." + "!</h1>");
-		
+			//RequestDispatcher dispatcher=request.getRequestDispatcher("index.jsp");
+			//dispatcher.forward(request, response);
+		}
 	}
 
 }
