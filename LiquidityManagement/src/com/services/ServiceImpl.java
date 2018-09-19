@@ -1,6 +1,7 @@
 package com.services;
 
-import com.beans.User;
+import java.util.List;
+import com.beans.*;
 import com.daos.Dao;
 import com.daos.DaoImpl;
 
@@ -22,8 +23,6 @@ public class ServiceImpl implements Service{
 		}
 		else
 			return null;
-		
-		
 	}
 
 	@Override
@@ -33,6 +32,21 @@ public class ServiceImpl implements Service{
 		System.out.println("Rows added: "+rowsAdded);
 		if(rowsAdded>0)
 			return true;
+		return false;
+	}
+	
+	@Override
+	public boolean addRandomCashflow(List<CashFlow> cashflow)
+	{
+		Dao dao=new DaoImpl();
+		int rows = dao.addRandomCashflowDao(cashflow);
+		if(rows == cashflow.size())
+		{
+			System.out.println(rows+" Rows added succesfully");
+			return true;
+		}
+		
+		System.out.println("Random cashflow addition failed");
 		return false;
 	}
 
