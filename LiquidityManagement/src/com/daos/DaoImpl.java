@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.beans.User;
+import java.util.List;
+import com.beans.*;
 import com.connection.MyConnection;
 
 public class DaoImpl implements Dao{

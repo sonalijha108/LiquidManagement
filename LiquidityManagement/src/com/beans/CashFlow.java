@@ -1,75 +1,100 @@
 package com.beans;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 public class CashFlow {
 
-	private String customerID;
-	private String tradeID;
+	public String tradeID;
+	private String clientName;
+	private String clientID;
 	private String currency;
+	private String inout;
 	private double amount;
-	private boolean buysell;
+	private Timestamp timestamp;
 	
 	public CashFlow() 
 	{
-		customerID = "pZQBdVefZJ";
-		tradeID = "33776";
+		tradeID = "1234";
+		clientName = "Apple";
+		clientID = "AM776";
 		currency = "USD";
 		amount = 500.00;
-		buysell = true;
+		inout = "IN";
 	}
 	
-	public CashFlow(String customerID, String tradeID, String currency, double amount, boolean buysell) 
+	public CashFlow(String tradeID, String clientName,String clientID, String currency, String inout, double amount, Timestamp timestamp) 
 	{
-		this.customerID = customerID;
 		this.tradeID = tradeID;
+		this.clientName = clientName;
+		this.clientID = clientID;
 		this.currency = currency;
 		this.amount = amount;
-		this.buysell = buysell;
+		this.inout = inout;
+		this.timestamp = timestamp;
 	}
-	
-	public String getCustomerID() {
-		return customerID;
-	}
-	
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
-	}
-	
+
 	public String getTradeID() {
 		return tradeID;
 	}
-	
+
 	public void setTradeID(String tradeID) {
 		this.tradeID = tradeID;
 	}
-	
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+	public String getClientID() {
+		return clientID;
+	}
+
+	public void setClientID(String clientID) {
+		this.clientID = clientID;
+	}
+
 	public String getCurrency() {
 		return currency;
 	}
-	
+
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	
+
+	public String getInout() {
+		return inout;
+	}
+
+	public void setInout(String inout) {
+		this.inout = inout;
+	}
+
 	public double getAmount() {
 		return amount;
 	}
-	
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	
-	public boolean isBuysell() {
-		return buysell;
+
+	public Timestamp getTimestamp() {
+		return timestamp;
 	}
-	
-	public void setBuysell(boolean buysell) {
-		this.buysell = buysell;
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	@Override
 	public String toString() {
-		return "CashFlow [customerID=" + customerID + ", tradeID=" + tradeID + ", currency=" + currency + ", amount="
-				+ amount + ", buysell=" + buysell + "]";
+		return "CashFlow [tradeID=" + tradeID + ", clientName=" + clientName + ", clientID=" + clientID + ", currency="
+				+ currency + ", inout=" + inout + ", amount=" + amount + "]";
 	}
+	
 	
 }

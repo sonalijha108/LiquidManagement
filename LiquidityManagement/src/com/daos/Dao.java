@@ -1,6 +1,7 @@
 package com.daos;
 
-import com.beans.User;
+import java.util.List;
+import com.beans.*;
 
 public interface Dao {
 	User LoginDao(String userName,String password);

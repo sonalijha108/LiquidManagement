@@ -52,7 +52,7 @@ public class RandGenerator {
     		java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
     		System.out.println(currentTimestamp);
     		
-    		cashflow.add(new CashFlow(tradeID,clientName,clientID,currency,amount,inout,currentTimestamp));
+    		cashflow.add(new CashFlow(tradeID,clientName,clientID,currency,inout,amount,currentTimestamp));
     	}
     	
     	return cashflow;
