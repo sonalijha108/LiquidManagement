@@ -1,7 +1,7 @@
 package com.services;
 
-import java.util.List;
-import com.beans.*;
+import com.beans.AccountData;
+import com.beans.User;
 import com.daos.Dao;
 import com.daos.DaoImpl;
 
@@ -19,14 +19,17 @@ public class ServiceImpl implements Service{
 		}
 			
 		if(userName.equals(user.getUsername())&&password.equals(user.getPassword()) ){
+			User.staticUsername=userName;
 			return user;
 		}
 		else
 			return null;
+		
+		
 	}
 
 	@Override
-	public boolean isUserAdded(User user) {
+	public boolean isUserAdded(AccountData user) {
 		Dao dao=new DaoImpl();
 		int rowsAdded=dao.addUser(user);
 		System.out.println("Rows added: "+rowsAdded);
@@ -34,20 +37,19 @@ public class ServiceImpl implements Service{
 			return true;
 		return false;
 	}
-	
+
 	@Override
-	public boolean addRandomCashflow(List<CashFlow> cashflow)
-	{
+	public AccountData getCurrentBalanceService() {
 		Dao dao=new DaoImpl();
-		int rows = dao.addRandomCashflowDao(cashflow);
-		if(rows == cashflow.size())
-		{
-			System.out.println(rows+" Rows added succesfully");
-			return true;
-		}
 		
-		System.out.println("Random cashflow addition failed");
+		return dao.getCurrentBalance();
+	}
+
+	@Override
+	public boolean isUserAdded(User user) {
+		// TODO Auto-generated method stub
 		return false;
 	}
+	
 
 }
