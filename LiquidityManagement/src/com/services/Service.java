@@ -1,10 +1,11 @@
 package com.services;
 
-import java.util.List;
-import com.beans.*;
+import com.beans.AccountData;
+import com.beans.User;
 
 public interface Service {
 	User loginUser(String user, String password);
 	boolean isUserAdded(User user);
-	boolean addRandomCashflow(List<CashFlow> cashflow);
+	AccountData getCurrentBalanceService();
+	public boolean isUserAdded(AccountData user);
 }
