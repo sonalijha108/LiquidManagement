@@ -1,90 +1,90 @@
 package com.beans;
 
-public class User {
-	
-	private int userID;
-	private String username;
-	public static String staticUsername=null;
-	private String password;
-	private String name;
-	private String emailID;
-	private Long contactInfo;
-	
-	public User() {
-		//userID=1001;
-		username="admin";
-		name="Citicorp India";
-		password="admin123";
-		emailID="citicorp@citi.com";
-		contactInfo=9999999999l;
-	}
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
-	public User(String username, String name,String password, String emailID, Long contactInfo) {
-		super();
-		
-		this.username = username;
-		this.password = password;
-		this.name = name;
-		this.emailID = emailID;
-		this.contactInfo = contactInfo;
+public class CashFlow {
+
+	public static List<CashFlow> cashFlows=new ArrayList<>();
+	public int tradeID;
+	private int clientID;
+	private String currency;
+	private String inout;
+	private double amount;
+	private Timestamp timestamp;
+	
+	public CashFlow() 
+	{
+		clientID = 1001;
+		currency = "USD";
+		amount = 500.00;
+		inout = "IN";
 	}
 	
-	
-	
-	public int getUserID() {
-		return userID;
+	public CashFlow(int tradeID,int clientID, String currency, String inout, double amount, Timestamp timestamp) 
+	{
+		this.tradeID = tradeID;
+		this.clientID = clientID;
+		this.currency = currency;
+		this.amount = amount;
+		this.inout = inout;
+		this.timestamp = timestamp;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public int getTradeID() {
+		return tradeID;
 	}
 
-	public String getUsername() {
-		return username;
+	public void setTradeID(int tradeID) {
+		this.tradeID = tradeID;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public int getClientID() {
+		return clientID;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setClientID(int i) {
+		this.clientID = i;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getCurrency() {
+		return currency;
 	}
 
-	public String getName() {
-		return name;
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getInout() {
+		return inout;
 	}
 
-	public String getEmailID() {
-		return emailID;
+	public void setInout(String inout) {
+		this.inout = inout;
 	}
 
-	public void setEmailID(String emailID) {
-		this.emailID = emailID;
+	public double getAmount() {
+		return amount;
 	}
 
-	public Long getContactInfo() {
-		return contactInfo;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
-	public void setContactInfo(Long contactInfo) {
-		this.contactInfo = contactInfo;
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", name=" + name + ", emailID=" + emailID
-				+ ", contactInfo=" + contactInfo + "]";
+		return "CashFlow [tradeID=" + tradeID + ", clientID=" + clientID + ", currency=" + currency + ", inout=" + inout
+				+ ", amount=" + amount + ", timestamp=" + timestamp + "]";
 	}
 	
 	
-
 }
