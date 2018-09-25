@@ -1,100 +1,90 @@
 package com.beans;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-
-public class CashFlow {
-
-	public String tradeID;
-	private String clientName;
-	private String clientID;
-	private String currency;
-	private String inout;
-	private double amount;
-	private Timestamp timestamp;
+public class User {
 	
-	public CashFlow() 
-	{
-		tradeID = "1234";
-		clientName = "Apple";
-		clientID = "AM776";
-		currency = "USD";
-		amount = 500.00;
-		inout = "IN";
+	private int userID;
+	private String username;
+	public static String staticUsername=null;
+	private String password;
+	private String name;
+	private String emailID;
+	private Long contactInfo;
+	
+	public User() {
+		//userID=1001;
+		username="admin";
+		name="Citicorp India";
+		password="admin123";
+		emailID="citicorp@citi.com";
+		contactInfo=9999999999l;
+	}
+
+	public User(String username, String name,String password, String emailID, Long contactInfo) {
+		super();
+		
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.emailID = emailID;
+		this.contactInfo = contactInfo;
 	}
 	
-	public CashFlow(String tradeID, String clientName,String clientID, String currency, String inout, double amount, Timestamp timestamp) 
-	{
-		this.tradeID = tradeID;
-		this.clientName = clientName;
-		this.clientID = clientID;
-		this.currency = currency;
-		this.amount = amount;
-		this.inout = inout;
-		this.timestamp = timestamp;
+	
+	
+	public int getUserID() {
+		return userID;
 	}
 
-	public String getTradeID() {
-		return tradeID;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
-	public void setTradeID(String tradeID) {
-		this.tradeID = tradeID;
+	public String getUsername() {
+		return username;
 	}
 
-	public String getClientName() {
-		return clientName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public String getPassword() {
+		return password;
 	}
 
-	public String getClientID() {
-		return clientID;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public void setClientID(String clientID) {
-		this.clientID = clientID;
+	public String getName() {
+		return name;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
+	public String getEmailID() {
+		return emailID;
 	}
 
-	public String getInout() {
-		return inout;
+	public void setEmailID(String emailID) {
+		this.emailID = emailID;
 	}
 
-	public void setInout(String inout) {
-		this.inout = inout;
+	public Long getContactInfo() {
+		return contactInfo;
 	}
 
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
-	public Timestamp getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+	public void setContactInfo(Long contactInfo) {
+		this.contactInfo = contactInfo;
 	}
 
 	@Override
 	public String toString() {
-		return "CashFlow [tradeID=" + tradeID + ", clientName=" + clientName + ", clientID=" + clientID + ", currency="
-				+ currency + ", inout=" + inout + ", amount=" + amount + "]";
+		return "User [username=" + username + ", password=" + password + ", name=" + name + ", emailID=" + emailID
+				+ ", contactInfo=" + contactInfo + "]";
 	}
 	
 	
+
 }
