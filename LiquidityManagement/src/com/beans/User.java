@@ -1,27 +1,42 @@
 package com.beans;
 
 public class User {
+	
+	private int userID;
 	private String username;
+	public static String staticUsername=null;
 	private String password;
 	private String name;
 	private String emailID;
-	private int contactInfo;
+	private Long contactInfo;
 	
 	public User() {
+		//userID=1001;
 		username="admin";
 		name="Citicorp India";
 		password="admin123";
 		emailID="citicorp@citi.com";
-		contactInfo=99999999;
+		contactInfo=9999999999l;
 	}
 
-	public User(String username, String name,String password, String emailID, int contactInfo) {
+	public User(String username, String name,String password, String emailID, Long contactInfo) {
 		super();
+		
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.emailID = emailID;
 		this.contactInfo = contactInfo;
+	}
+	
+	
+	
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 	public String getUsername() {
@@ -56,11 +71,11 @@ public class User {
 		this.emailID = emailID;
 	}
 
-	public int getContactInfo() {
+	public Long getContactInfo() {
 		return contactInfo;
 	}
 
-	public void setContactInfo(int contactInfo) {
+	public void setContactInfo(Long contactInfo) {
 		this.contactInfo = contactInfo;
 	}
 
