@@ -75,11 +75,10 @@ public class DaoImpl implements Dao{
 	}
 	
 	@Override
-	public int addCashflowDao()
+	public int addCashflowDao(List<CashFlow> cashflows)
 	{
-		RandCashFlowGenerator r = new RandCashFlowGenerator(30, 100, 1000);
-		CashFlow.cashFlows = r.GenerateRandomCashFlow();
-		int NoOfCashFlows = CashFlow.cashFlows.size();
+		
+		int NoOfCashFlows = cashflows.size();
 		int rowsAdded=0;
 		Connection conn=MyConnection.openConnection();
 		for(int i=0;i<NoOfCashFlows;i++)
@@ -89,11 +88,11 @@ public class DaoImpl implements Dao{
 					PreparedStatement pstatement=conn.prepareStatement(addCashFlow);
 					//pstatement.setInt(1, CashFlow.cashFlows.get(i).getTradeID());
 					//pstatement.setString(2, CashFlow.cashFlows.get(i).getClientName());
-					pstatement.setInt(1, CashFlow.cashFlows.get(i).getClientID());
-					pstatement.setString(2, CashFlow.cashFlows.get(i).getCurrency());
-					pstatement.setString(3, CashFlow.cashFlows.get(i).getInout());
-					pstatement.setDouble(4, CashFlow.cashFlows.get(i).getAmount());
-					pstatement.setTimestamp(5, CashFlow.cashFlows.get(i).getTimestamp());
+					pstatement.setInt(1, cashflows.get(i).getClientID());
+					pstatement.setString(2, cashflows.get(i).getCurrency());
+					pstatement.setString(3,cashflows.get(i).getInout());
+					pstatement.setDouble(4, cashflows.get(i).getAmount());
+					pstatement.setTimestamp(5, cashflows.get(i).getTimestamp());
 					rowsAdded += pstatement.executeUpdate();
 					
 				} catch (SQLException e) {
@@ -101,7 +100,6 @@ public class DaoImpl implements Dao{
 				e.printStackTrace();
 			}
 		}
-		CashFlow.cashFlows=null;
 		return rowsAdded;
 	}
 
@@ -123,7 +121,6 @@ public class DaoImpl implements Dao{
 					rowsAdded += pstatement.executeUpdate();
 					
 				} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
@@ -156,53 +153,78 @@ public class DaoImpl implements Dao{
 	}
 	@Override
 	public AccountData getCurrentBalance() {
-		AccountData accountData=new AccountData(0, 0, 0, null, null, null, null, null);
+		AccountData accountData=new AccountData("John_123", "John123", "John", "john@citi.com", 7865456732l, 0,0,0);
+		System.out.println("herehere");
+		
 		double inflowOutflowDifference_USD=0.0;
 		double inflowOutflowDifference_EUR=0.0;
 		double inflowOutflowDifference_GBP=0.0;
-		/*Connection conn=MyConnection.openConnection();
-		String getInflow="select Cashflows.Currency, sum(Cashflows.Amount) from Cashflows join Users on Cashflows.Client_ID=Users.Client_ID where Cashflows.Inflow_outflow='IN' && Clients.Username=? group by Currency";
-		String getOutflow="select Cashflows.Currency, sum(Cashflows.Amount) from Cashflows join Users on Cashflows.Client_ID=Users.Client_ID where Cashflows.Inflow_outflow='OUT' && Clients.Username=? group by Currency";
-		String getInitialBalance="select Notional_GBP, Notional_EUR, Notional_USD from Clients where Client_ID=?";
+		Connection conn=MyConnection.openConnection();
+		String getInflow=" select cashflow.CURRENCY, sum(Cashflow.AMOUNT) from Cashflow join Users on Cashflow.Client_ID=Users.User_ID where Cashflow.Inout='IN' and Users.Username=? group by Cashflow.Currency";
+		String getOutflow="select cashflow.currency, sum(Cashflow.Amount) from Cashflow join Users on Cashflow.Client_ID=Users.User_ID where Cashflow.Inout='OUT' and Users.Username=? group by Cashflow.Currency";
+		String getInitialBalance="select Notional_GBP, Notional_EUR, Notional_USD from Users where Username=?";
 		try {
 			PreparedStatement statement;
 			statement=conn.prepareStatement(getInflow);
 			statement.setString(1, User.staticUsername);
+			System.out.println(statement);
 			ResultSet set=statement.executeQuery();
 			while(set.next()) {
-				if((set.getString(1)).equals("USD"))
+				if((set.getString(1)).equals("USD")) {
 					inflowOutflowDifference_USD=set.getDouble(2);
-				else if((set.getString(1)).equals("GBP"))
+					System.out.println("USD Inflow total"+inflowOutflowDifference_USD);
+				}
+				else if((set.getString(1)).equals("GBP")) {
 					inflowOutflowDifference_GBP=set.getDouble(2);
-				else if((set.getString(1)).equals("EUR"))
+					System.out.println("GBP Inflow total"+inflowOutflowDifference_GBP);
+				}
+				else if((set.getString(1)).equals("EUR")) {
 					inflowOutflowDifference_EUR=set.getDouble(2);
-			}
-			statement=conn.prepareStatement(getOutflow);
-			statement.setString(1, User.staticUsername);
-			ResultSet set1=statement.executeQuery();
-			while(set1.next()) {
-				if((set1.getString(1)).equals("USD"))
-					inflowOutflowDifference_USD-=set1.getDouble(2);
-				else if((set1.getString(1)).equals("GBP"))
-					inflowOutflowDifference_USD-=set1.getDouble(2);
-				else if((set1.getString(1)).equals("EUR"))
-					inflowOutflowDifference_USD-=set1.getDouble(2);
-			}
-			statement=conn.prepareStatement(getInitialBalance);
-			statement.setString(1, User.staticUsername);
-			ResultSet set2=statement.executeQuery();
-			while(set2.next()) {
-				accountData.setGBP_current(set2.getDouble(1)+inflowOutflowDifference_GBP);
-				accountData.setEUR_current(set2.getDouble(2)+inflowOutflowDifference_EUR);
-				accountData.setUSD_current(set2.getDouble(3)+inflowOutflowDifference_USD);
+					System.out.println("EUR Inflow total"+inflowOutflowDifference_EUR);
+
+				}
 			}
 			
-		
+			statement=conn.prepareStatement(getOutflow);
+			statement.setString(1, User.staticUsername);
+			System.out.println(statement);
+			ResultSet set1=statement.executeQuery();
+			while(set1.next()) {
+				if((set1.getString(1)).equals("USD")) {
+					System.out.println("USD Outflow total: "+set1.getDouble(2));
+					inflowOutflowDifference_USD=inflowOutflowDifference_USD-set1.getDouble(2);
+					
+					System.out.println("USD Notional balance final"+inflowOutflowDifference_USD);
+				}
+				else if((set1.getString(1)).equals("GBP")) {
+					System.out.println("GBP Outflow total: "+set1.getDouble(2));
+					inflowOutflowDifference_GBP=inflowOutflowDifference_GBP-set1.getDouble(2);
+					
+					System.out.println("GBP Notional balance final"+inflowOutflowDifference_GBP);
+				}
+				else if((set1.getString(1)).equals("EUR")) {
+					System.out.println("EUR Outflow total: "+set1.getDouble(2));
+					inflowOutflowDifference_EUR=inflowOutflowDifference_EUR-set1.getDouble(2);
+					
+					System.out.println("EUR Notional balance final"+inflowOutflowDifference_EUR);
+				}
+			}
+			System.out.println("EUR Difference"+inflowOutflowDifference_EUR);
+			statement=conn.prepareStatement(getInitialBalance);
+			statement.setString(1, User.staticUsername);
+			System.out.println(statement);
+			ResultSet set2=statement.executeQuery();
+			while(set2.next()) {
+				accountData.setGBP_NotionalBalance(set2.getDouble(1)+inflowOutflowDifference_GBP);
+				accountData.setEUR_NotionalBalance(set2.getDouble(2)+inflowOutflowDifference_EUR);
+				accountData.setUSD_NotionalBalance(set2.getDouble(3)+inflowOutflowDifference_USD);
+			}
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		return (new AccountData(300.00, 300.80, 400.80, "citi", "CITI", "citi123", "citi@citi.com", 9999999999L));
+		}
+		System.out.println("acountdata"+accountData);
+		return accountData;
 		
 	}
 	

@@ -6,7 +6,7 @@ public class AccountData extends User{
 	private double GBP_NotionalBalance;
 	private double EUR_NotionalBalance;
 	
-	public AccountData(double uSD_NotionalBalance, double gBP_NotionalBalance, double eUR_NotionalBalance, String username, String name, String password, String emailID, Long contactInfo) {
+	public AccountData( String username,  String password,String name, String emailID, Long contactInfo,double uSD_NotionalBalance,double eUR_NotionalBalance, double gBP_NotionalBalance) {
 		super(username, name, password, emailID, contactInfo);
 		USD_NotionalBalance = uSD_NotionalBalance;
 		GBP_NotionalBalance = gBP_NotionalBalance;

@@ -12,7 +12,7 @@ public class TestLoginDao {
 
 	public static void main(String[] args) {
 		Dao dao=new DaoImpl();
-		AccountData accountdata=new AccountData(500, 400, 300, "relind", "reliance", "relind123", "relind@gmail.com", 8888888888L);
+		AccountData accountdata=new AccountData( "relind", "reliance", "relind123", "relind@gmail.com", 8888888888L,1000d,2000d,3000d);
 		dao.addUser(accountdata);
 
 		System.out.println("User and account data"+accountdata);

@@ -4,7 +4,7 @@ public class User {
 	
 	private int userID;
 	private String username;
-	public static String staticUsername=null;
+	public static String staticUsername="John_123";
 	private String password;
 	private String name;
 	private String emailID;

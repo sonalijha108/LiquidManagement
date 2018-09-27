@@ -41,7 +41,7 @@ public class Signup extends HttpServlet {
 		String password=request.getParameter("password");
 		String comfirmPassword=request.getParameter("confirmpassword");
 		String emailID=request.getParameter("emailid");
-		int contactInfo=Integer.parseInt(request.getParameter("contactinfo"));
+		long contactInfo=Long.parseLong(request.getParameter("contactinfo"));
 		System.out.println(name+userName);
 		if((!userName.isEmpty())&&(!password.isEmpty())&&(password.equals(comfirmPassword))&&(!name.isEmpty())) {
 			System.out.println("condition satisfied");

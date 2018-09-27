@@ -2,6 +2,7 @@ package com.beans;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CashFlow {
@@ -13,6 +14,10 @@ public class CashFlow {
 	private String inout;
 	private double amount;
 	private Timestamp timestamp;
+	Calendar calendar = Calendar.getInstance();
+	java.util.Date now = calendar.getTime();
+	java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
+
 	
 	public CashFlow() 
 	{
@@ -20,11 +25,13 @@ public class CashFlow {
 		currency = "USD";
 		amount = 500.00;
 		inout = "IN";
+		timestamp=currentTimestamp;
+		
 	}
 	
-	public CashFlow(int tradeID,int clientID, String currency, String inout, double amount, Timestamp timestamp) 
+	public CashFlow(int clientID, String currency, String inout, double amount, Timestamp timestamp) 
 	{
-		this.tradeID = tradeID;
+		
 		this.clientID = clientID;
 		this.currency = currency;
 		this.amount = amount;

@@ -14,6 +14,6 @@ public interface Dao {
 	AccountData LoginDao(String userName,String password);
 	int addUser(AccountData user);
 	AccountData getCurrentBalance();
-	int addCashflowDao();
+	int addCashflowDao(List<CashFlow> cashflow);
 	int addMarketRatesDao(int rowsAdded);
 	int addForexRatesDao(int rowsAdded);}

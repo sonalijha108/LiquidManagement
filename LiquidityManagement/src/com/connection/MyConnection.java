@@ -11,7 +11,7 @@ public class MyConnection {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			System.out.println("Driver loaded");
-			conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=CITI", "sa", "sa123");
+			conn=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=PROJECT", "sa", "sa123");
 			System.out.println("Connection established");
 			//return conn;
 

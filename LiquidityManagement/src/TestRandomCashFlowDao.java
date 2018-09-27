@@ -21,7 +21,7 @@ public class TestRandomCashFlowDao {
 		
 		//Service service=new ServiceImpl();
 		Dao dao=new DaoImpl();
-		int x=dao.addCashflowDao();
+		int x=dao.addCashflowDao(cashflow);
 		System.out.println(x);
 
 		}
